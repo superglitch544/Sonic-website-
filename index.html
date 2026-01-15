@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sonic the Hedgehog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(#0a66ff,#000); color:white; text-align:center;}
+header {background:linear-gradient(90deg,#0047ff,#00e5ff); padding:20px;}
+nav {background:#001b44; padding:10px;}
+nav a {color:yellow; margin:10px; text-decoration:none; font-weight:bold;}
+section {margin:15px; padding:15px; background:rgba(0,0,0,0.5); border-radius:15px;}
+#game {position:relative; width:90%; max-width:500px; height:200px; margin:20px auto; background:#111; border-radius:15px; overflow:hidden;}
+#sonic {position:absolute; bottom:10px; left:30px; width:60px;}
+#enemy {position:absolute; bottom:10px; right:-60px; width:50px;}
+.jump {animation:jump 0.6s ease-out;}
+@keyframes jump {0%{bottom:10px;}50%{bottom:100px;}100%{bottom:10px;}}
+button {padding:15px 25px; font-size:16px; border:none; border-radius:30px; background:yellow; font-weight:bold; margin:10px;}
+footer {padding:10px; font-size:0.9em; background:#000;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🌀 Sonic the Hedgehog 🌀</h1>
+<p>Gotta Go Fast!</p>
+<a href="login.html"><button>Login</button></a>
+<a href="signup.html"><button>Sign Up</button></a>
+</header>
+
+<nav>
+<a href="#about">About</a>
+<a href="#characters">Characters</a>
+<a href="#game-section">Mini Game</a>
+</nav>
+
+<section id="about">
+<h2>About Sonic</h2>
+<p>Sonic is the fastest hero alive. He protects the world from villains like Dr. Eggman using his speed and courage.</p>
+</section>
+
+<section id="characters">
+<h2>Characters</h2>
+<ul style="list-style:none; padding:0;">
+<li>🌀 Sonic</li>
+<li>🦊 Tails</li>
+<li>👊 Knuckles</li>
+<li>🤖 Dr. Eggman</li>
+</ul>
+</section>
+
+<section id="game-section">
+<h2>🎮 Sonic Mini Game</h2>
+<p>Jump over the enemy and survive!</p>
+<div id="game">
+<img id="sonic" src="https://upload.wikimedia.org/wikipedia/en/5/5c/Sonic_the_Hedgehog.png">
+<img id="enemy" src="https://upload.wikimedia.org/wikipedia/en/8/8c/Dr._Eggman.png">
+</div>
+<button onclick="jump()">⬆ Jump</button>
+<p id="score">Score: 0</p>
+</section>
+
+<footer>
+<p>Sonic Fan Website | Not Official</p>
+</footer>
+
+<script>
+let sonic=document.getElementById("sonic");
+let enemy=document.getElementById("enemy");
+let score=0;
+
+function jump(){
+if(!sonic.classList.contains("jump")){
+  sonic.classList.add("jump");
+  setTimeout(()=>{sonic.classList.remove("jump");},600);
+}}
+
+setInterval(()=>{
+let enemyLeft=enemy.offsetLeft;
+enemy.style.left=enemyLeft-5+"px";
+if(enemyLeft<-60){enemy.style.left="100%"; score++; document.getElementById("score").innerText="Score: "+score;}
+let sonicBottom=parseInt(getComputedStyle(sonic).bottom);
+if(enemyLeft<90 && enemyLeft>30 && sonicBottom<40){alert("💥 GAME OVER! Score: "+score); location.reload();}
+},30);
+</script>
+
+</body>
+</html>
