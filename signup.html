@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sign Up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(#0a66ff,#000);color:white;text-align:center;}
+form{background:rgba(0,0,0,0.5);margin:50px auto;padding:20px;border-radius:15px;width:90%;max-width:400px;}
+input{width:90%;padding:10px;margin:10px 0;border-radius:10px;border:none;font-size:16px;}
+button{padding:15px 25px;font-size:16px;border:none;border-radius:30px;background:yellow;font-weight:bold;margin:10px;}
+</style>
+</head>
+<body>
+
+<h1>Sign Up</h1>
+<form onsubmit="signup(event)">
+<input type="text" id="username" placeholder="Username" required><br>
+<input type="password" id="password" placeholder="Password" required><br>
+<button type="submit">Sign Up</button>
+</form>
+<p>Already have an account? <a href="login.html" style="color:yellow;">Login</a></p>
+
+<script>
+function signup(e){
+e.preventDefault();
+let u=document.getElementById("username").value;
+let p=document.getElementById("password").value;
+if(u && p){
+localStorage.setItem("sonicUser_"+u,p);
+alert("Sign Up Successful! You can now login.");
+window.location="login.html";
+}
+}
+</script>
+
+</body>
+</html>
